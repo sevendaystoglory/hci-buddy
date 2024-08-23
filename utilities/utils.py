@@ -8,16 +8,22 @@ from termcolor import colored
 from pydantic import BaseModel
 from openai import OpenAI
 from dotenv import load_dotenv
+from utilities.db_utils import get_memory, store_memory
 import os
+import uuid
+
 load_dotenv()
 
 client = OpenAI(api_key = os.getenv('OPENAI_KEY'))
+buddy_name = api_key = os.getenv('BUDDY_NAME')
 global_path = os.getenv("GLOBAL_PATH")
 
 class MemoryResponse(BaseModel):
-
     memory_found: bool
     memory: str
+
+def generate_new_user_id():
+    return str(uuid.uuid4())
 
 def generate_final_prompt(user_name : str, memory : str, user_utterance : str, conversation : str):
 
@@ -46,7 +52,7 @@ def openai_response(prompt_list : list, structured = False):
 
     if structured == "True-memory":
         completion = client.beta.chat.completions.parse(
-        model="gpt-4o-2024-08-06",
+        model="gpt-4o-mini",
         messages=prompt_list,
         response_format=MemoryResponse,
         )
@@ -62,7 +68,7 @@ def openai_response(prompt_list : list, structured = False):
 
     else:
         completion = client.chat.completions.create(
-            model = "gpt-4o",
+            model = "gpt-4o-mini",
             messages = prompt_list,
             temperature = 0.2
         )
@@ -79,25 +85,24 @@ def transcribe_audio(file_path : str):
     )
     print(transcription.text)
 
-def generate_reply_1(user_utterance : str, user_name : str, conversation : str):
+def generate_reply_1(user_utterance : str, user_name : str, conversation : str, user_id : str, db):
 
-    buddy_preamble = """
-    Your name is Juan. You are excited about the world. You like sarcasm and helping people. You are shy at first but with time become talkative to your friend. You like to gain knowledge and read books. You can talk in slang and can be blunt at times. Always consider the person your friend and you may be informal to him. Keep the talk short.
+    buddy_preamble = f"""
+    Your name is {buddy_name}. You are excited about the world. You like sarcasm and helping people. You are shy at first but with time become talkative to your friend. You like to gain knowledge and read books. You can talk in slang and can be blunt at times. Always consider the person your friend and you may be informal to him. Keep the talk short.
     """
-    
-    with open(f"{global_path}/memory.txt", 'r') as file:
-        memory = file.read()
+    memory = get_memory(db = db, user_id = user_id)
+    print(colored(memory, 'yellow'))
 
     content = generate_final_prompt(user_name = user_name, memory = memory, user_utterance = user_utterance, conversation = conversation)
     prompt_list = [{"role" : "system" , "content" : buddy_preamble}, {"role" : "user" , "content" : content}]
     
-    synthesize_memory(user_utterance = user_utterance, user_name = user_name, conversation = conversation)
+    synthesize_memory(user_utterance = user_utterance, user_name = user_name, conversation = conversation, db = db, user_id = user_id)
 
     reply = openai_response(prompt_list)
     print(colored(reply, 'red'))
     return(reply)
 
-def synthesize_memory(user_utterance : str, user_name : str, conversation):
+def synthesize_memory(user_utterance : str, user_name : str, user_id : str, conversation, db):
 
     if conversation != "":
         conversation = f"""The utterance is in context to the below conversation. Remember that you have to extract the memory from the utterance only and not the conversation. It is given to help you with the context.
@@ -126,6 +131,9 @@ def synthesize_memory(user_utterance : str, user_name : str, conversation):
 
     response = openai_response(prompt_list, structured = "True-memory")
     if response['memory_found'] == True:
+
+        store_memory(db = db, user_id = user_id, memory = response['memory'])
+
         with open(f"{global_path}/memory.txt", 'a') as file:
             file.write(response['memory'])
         return(True)

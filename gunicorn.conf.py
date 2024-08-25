@@ -29,7 +29,6 @@ loglevel = "info"
 capture_output = True
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(L)s'
 
-
 # Server mechanics
 daemon = True
 pidfile = "/hci/logs/nova.pid"

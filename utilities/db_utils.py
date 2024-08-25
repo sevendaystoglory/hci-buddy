@@ -1,11 +1,22 @@
+"""
+Author: Nishant Sharma (nishant@insituate.ai)
+
+File: utilities/db_utils.py
+Description: Implements methods/ functions for database operations
+"""
+
 from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, Session
-from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from fastapi.responses import JSONResponse
+from utilities.core_utils import *
 
 Base = declarative_base()
+config = load_config()
+
+
+#Define Classes =========================================================================
 
 # User model
 class User(Base):
@@ -38,7 +49,21 @@ class Conversation(Base):
     message = Column(Text, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
-## depth 0 Helper Functions
+#Instantiate a database Session =========================================================
+
+engine = create_engine(config['database_url'])
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+#CRUD Database functions ================================================================
+
 
 # Create a new user
 def create_user(user_id: str, name: str, password: str, email : str, db: Session):
@@ -46,7 +71,7 @@ def create_user(user_id: str, name: str, password: str, email : str, db: Session
     existing_user = db.query(User).filter(User.email == email).first()
     if existing_user:
         return JSONResponse(status_code=400, content={"message": "Duplicate email_id"})
-    
+
     # If email doesn't exist, create a new user
     db_user = User(user_id=user_id, name=name, email=email)
     db_user.set_password(password)
@@ -64,7 +89,7 @@ def user_login(email: str, password: str, db: Session):
     # Check if the password is correct
     if not user.check_password(password):  # Assuming the User model has a check_password method
         return JSONResponse(status_code=400, content={"message": "Incorrect passowrd"})
-    
+
     # If both email and password match, return the user_id
     return {"user_id": user.user_id}    
 
@@ -93,19 +118,6 @@ def delete_user(user_id: str, db: Session):
         db.commit()
     return True
 
-# Dependency to get the DB session
-DATABASE_URL = "postgresql://nishant:nova123456@localhost:5432/nova_db"
-
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 # Route to update memory
 def update_memory(user_id: str, memory: str, db: Session):
     return store_memory(db=db, user_id=user_id, memory=memory)
@@ -127,7 +139,7 @@ def read_conversation(user_id: str, db: Session):
     
     # Check if there are any conversation records
     if not conversation_records:
-        return "Conversation not found."
+        return ""
 
     # Concatenate the conversation into a single string
     conversation_str = ""
@@ -137,7 +149,8 @@ def read_conversation(user_id: str, db: Session):
     return conversation_str.strip()  # Remove the trailing newline
 
 
-## depth 1 Helper Functions
+#CRUD Database helper functions =========================================================
+
 
 # Store or update memory for a user
 def store_memory(db: Session, user_id: str, memory: str):

@@ -1,7 +1,0 @@
-# Create the database connection
-DATABASE_URL = "postgresql://fastapi_user:your_password@localhost/fastapi_db"
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Create tables
-Base.metadata.create_all(bind=engine)

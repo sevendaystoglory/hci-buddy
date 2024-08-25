@@ -2,88 +2,19 @@
 Author: Nishant Sharma (nishant@insituate.ai)
 
 File: utilities/utils.py
-Description: Implements various global methods for HCI bot.
+Description: Implements various global methods for Nova
 """
-from termcolor import colored
-from pydantic import BaseModel
-from openai import OpenAI
-from dotenv import load_dotenv
-from utilities.db_utils import get_memory, store_memory
-import os
-import uuid
+from utilities.db_utils import *
+from utilities.llm_utils import openai_response, bedrock_response, groq_response, openai_client
 
 load_dotenv()
 
-client = OpenAI(api_key = os.getenv('OPENAI_KEY'))
-buddy_name = api_key = os.getenv('BUDDY_NAME')
-global_path = os.getenv("GLOBAL_PATH")
+config = load_config()
 
-class MemoryResponse(BaseModel):
-    memory_found: bool
-    memory: str
-
-def generate_new_user_id():
-    return str(uuid.uuid4())
-
-def generate_final_prompt(user_name : str, memory : str, user_utterance : str, conversation : str):
-
-    if memory != "":
-        memory = f"""The following is a memory about {user_name}. It contains experiences and opinions.
-        {memory}
-        """
-
-    if conversation != "":
-        conversation = f"""The following is a conversation of you and {user_name}, for context:
-        {conversation}
-        """
-
-    prompt = f"""You are {user_name}'s buddy.
-
-    {memory}
-    
-    {conversation}
-    {user_name} : {user_utterance}
-
-    You have to reply to keep the conversation flowing.
-    """
-    return(prompt)
-
-def openai_response(prompt_list : list, structured = False):
-
-    if structured == "True-memory":
-        completion = client.beta.chat.completions.parse(
-        model="gpt-4o-mini",
-        messages=prompt_list,
-        response_format=MemoryResponse,
-        )
-        message = completion.choices[0].message
-
-        print(message)
-        if message.refusal:
-            return ({'memory_found' : False})
-        elif message.parsed.memory_found == True:
-            return ({'memory_found' : True, 'memory' : message.parsed.memory})
-        else:
-            return ({'memory_found' : False})
-
-    else:
-        completion = client.chat.completions.create(
-            model = "gpt-4o-mini",
-            messages = prompt_list,
-            temperature = 0.2
-        )
-    reply = completion.choices[0].message.content
-    
-    return(reply)
-
-def transcribe_audio(file_path : str):
-
-    audio_file= open(f"{global_path}/audio.mp3", "rb")
-    transcription = client.audio.transcriptions.create(
-        model="whisper-1", 
-        file=audio_file
-    )
-    print(transcription.text)
+buddy_name = config['buddy_name']
+global_path = config['global_path']
+memory_model_name = config['memory_model_name']
+reply_model_name = config['reply_model_name']
 
 def generate_reply_1(user_utterance : str, user_name : str, conversation : str, user_id : str, db):
 
@@ -98,8 +29,8 @@ def generate_reply_1(user_utterance : str, user_name : str, conversation : str, 
     
     synthesize_memory(user_utterance = user_utterance, user_name = user_name, conversation = conversation, db = db, user_id = user_id)
 
-    reply = openai_response(prompt_list)
-    print(colored(reply, 'red'))
+    reply = model_response(model_name = reply_model_name, prompt_list = prompt_list)
+
     return(reply)
 
 def synthesize_memory(user_utterance : str, user_name : str, user_id : str, conversation, db):
@@ -129,15 +60,26 @@ def synthesize_memory(user_utterance : str, user_name : str, user_id : str, conv
 
     prompt_list = [{"role" : "system" , "content" : preamble}, {"role" : "user" , "content" : final_prompt}]
 
-    response = openai_response(prompt_list, structured = "True-memory")
+    response = model_response(prompt_list = prompt_list, model_name = memory_model_name, structured = 'True-memory')
+    
     if response['memory_found'] == True:
-
         store_memory(db = db, user_id = user_id, memory = response['memory'])
-
-        with open(f"{global_path}/memory.txt", 'a') as file:
-            file.write(response['memory'])
         return(True)
     else:
         return(False)
 
+def model_response(model_name :  str, prompt_list : list, structured = False):
+    
+    global config
+
+    if model_name == 'openai':
+        reply = openai_response(prompt_list, structured = structured)
+    elif model_name == 'bedrock':
+        reply = bedrock_response(prompt_list, structured = structured)
+    elif model_name == 'groq':
+        reply = groq_response(prompt_list, structured = structured)
+    else:
+        reply = openai_response(prompt_list, structured = structured)
+
+    return reply
     

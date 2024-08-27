@@ -5,9 +5,9 @@ File: utilities/db_utils.py
 Description: Implements methods/ functions for database operations
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, Text, ForeignKey, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship, Session
+from sqlalchemy.orm import sessionmaker, Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from fastapi.responses import JSONResponse
 from utilities.core_utils import *
@@ -180,5 +180,4 @@ def store_conversation(db: Session, user_id: str, role: str, message: str):
 # Retrieve conversation for a user
 def get_conversation(db: Session, user_id: str):
     return db.query(Conversation).filter(Conversation.user_id == user_id).order_by(Conversation.timestamp).all()
-
 

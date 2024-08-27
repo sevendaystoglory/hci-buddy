@@ -17,7 +17,10 @@ async def generate_reply_1(user_utterance: str, user_name: str, conversation: st
     memory = get_memory(db=db, user_id=user_id)
     print(colored(memory, 'yellow'))
 
-    content = generate_final_prompt(user_name=user_name, memory=memory, user_utterance=user_utterance, conversation=conversation, buddy_name=buddy_name)
+    # To retrieve a summary
+    user_summary = get_user_summary(user_id=user_id, db=db)
+
+    content = generate_final_prompt(user_id=user_id, user_name=user_name, memory=memory, user_utterance=user_utterance, conversation=conversation, buddy_name=buddy_name, user_summary=user_summary)
     prompt_list = [{"role": "system", "content": buddy_preamble}, {"role": "user", "content": content}]
 
     # Run both coroutines concurrently
@@ -27,6 +30,7 @@ async def generate_reply_1(user_utterance: str, user_name: str, conversation: st
     )
 
     return reply
+
 
 async def synthesize_memory(user_utterance: str, user_name: str, user_id: str, conversation, db):
     if user_utterance != "":
@@ -71,4 +75,24 @@ async def model_response(model_name: str, prompt_list: list, structured=False):
     reply = remove_prefixes(remove_emojis(reply), ['Nova:', 'Nova :', 'Haha,', 'haha,', 'nova:', 'nova: '])
 
     return reply
+
+async def generate_summary_and_insights(user_id: str, conversation: str, db: Session):
+    # Load the summary prompt
+    summary_prompt = load_text_file('utilities/prompts/summary_prompt.txt')
+    
+    # Create the prompt list
+    prompt_list = [
+        {"role": "system", "content": "You are an AI assistant tasked with generating a summary of a user's conversation."},
+        {"role": "user", "content": summary_prompt.format(conversation=conversation)}
+    ]
+    
+    # Generate the summary using one of the models
+    summary = await model_response(model_name=config['summary_model_name'], prompt_list=prompt_list, structured=False)
+    
+    # Add or update the summary in the database
+    upsert_summary(user_id=user_id, summary=summary, db=db)
+    
+    return summary
+
+    
 

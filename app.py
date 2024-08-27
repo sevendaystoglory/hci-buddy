@@ -122,12 +122,17 @@ async def generate_text(data: InputData, db: Session = Depends(get_db)):
         reply = await generate_reply_1(user_utterance=user_input, user_id=user_id, user_name=user_name, conversation=conversation_history, db=db)
         add_conversation(user_id=user_id, role=user_name, message=user_input, db=db)
         add_conversation(user_id=user_id, role="Nova", message=reply, db=db)
-        return JSONResponse(status_code = 200, content={"message": reply})
+        response = JSONResponse(status_code=200, content={"message": reply})
+        
+        # Call generate_summary_and_insights after returning the response
+        await generate_summary_and_insights(user_id=user_id, db=db, conversation=conversation_history)
+        print(response)
+        return response
     else:
         return JSONResponse(status_code=400, content={"message": "Invalid input"})
     
     # except Exception as e:
-        # return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"message": "Internal Server Error"})
+    #     return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"message": "Internal Server Error"})
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=6000, threaded=True)

@@ -10,10 +10,10 @@ VENV_PATH="$PROJECT_DIR/hci-venv"
 GUNICORN_CONF="$PROJECT_DIR/gunicorn.conf.py"
 
 # Path to your FastAPI application
-APP_PATH="application:app"
+APP_PATH="app:app"
 
 # PID file path (should match the one in your Gunicorn config)
-PID_FILE="$PROJECT_DIR/logs/nyaay-defect-analysis.pid"
+PID_FILE="$PROJECT_DIR/logs/nova.pid"
 
 # Log directory
 LOG_DIR="$PROJECT_DIR/logs"

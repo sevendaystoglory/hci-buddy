@@ -1,0 +1,381 @@
+[2024-08-26 03:16:24 +0530] [159833] [INFO] Starting gunicorn 23.0.0
+[2024-08-26 03:16:24 +0530] [159833] [INFO] Listening at: http://0.0.0.0:5000 (159833)
+[2024-08-26 03:16:24 +0530] [159833] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-26 03:16:24 +0530] [159835] [INFO] Booting worker with pid: 159835
+[2024-08-26 03:16:24 +0530] [159835] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'application'
+[2024-08-26 03:16:24 +0530] [159835] [INFO] Worker exiting (pid: 159835)
+[2024-08-26 03:16:24 +0530] [159836] [INFO] Booting worker with pid: 159836
+[2024-08-26 03:16:24 +0530] [159836] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'application'
+[2024-08-26 03:16:24 +0530] [159836] [INFO] Worker exiting (pid: 159836)
+[2024-08-26 03:16:24 +0530] [159833] [ERROR] Worker (pid:159835) exited with code 3
+[2024-08-26 03:16:24 +0530] [159833] [ERROR] Worker (pid:159836) was sent SIGTERM!
+[2024-08-26 03:16:24 +0530] [159833] [ERROR] Shutting down: Master
+[2024-08-26 03:16:24 +0530] [159833] [ERROR] Reason: Worker failed to boot.
+[2024-08-26 03:17:16 +0530] [160031] [INFO] Starting gunicorn 23.0.0
+[2024-08-26 03:17:16 +0530] [160031] [INFO] Listening at: http://0.0.0.0:5000 (160031)
+[2024-08-26 03:17:16 +0530] [160031] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-26 03:17:16 +0530] [160033] [INFO] Booting worker with pid: 160033
+[2024-08-26 03:17:16 +0530] [160033] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'application'
+[2024-08-26 03:17:16 +0530] [160033] [INFO] Worker exiting (pid: 160033)
+[2024-08-26 03:17:16 +0530] [160034] [INFO] Booting worker with pid: 160034
+[2024-08-26 03:17:16 +0530] [160034] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/hci/hci-venv/lib/python3.12/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'application'
+[2024-08-26 03:17:16 +0530] [160034] [INFO] Worker exiting (pid: 160034)
+[2024-08-26 03:17:16 +0530] [160031] [ERROR] Worker (pid:160033) exited with code 3
+[2024-08-26 03:17:16 +0530] [160031] [ERROR] Worker (pid:160034) was sent SIGTERM!
+[2024-08-26 03:17:16 +0530] [160031] [ERROR] Shutting down: Master
+[2024-08-26 03:17:16 +0530] [160031] [ERROR] Reason: Worker failed to boot.
+[2024-08-26 03:31:28 +0530] [160598] [INFO] Starting gunicorn 23.0.0
+[2024-08-26 03:31:28 +0530] [160598] [INFO] Listening at: http://0.0.0.0:5000 (160598)
+[2024-08-26 03:31:28 +0530] [160598] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-26 03:31:28 +0530] [160600] [INFO] Booting worker with pid: 160600
+[2024-08-26 03:31:28 +0530] [160601] [INFO] Booting worker with pid: 160601
+[2024-08-26 03:31:28 +0530] [160602] [INFO] Booting worker with pid: 160602
+[2024-08-26 03:31:30 +0530] [160602] [INFO] Started server process [160602]
+[2024-08-26 03:31:30 +0530] [160602] [INFO] Waiting for application startup.
+[2024-08-26 03:31:30 +0530] [160602] [INFO] Application startup complete.
+[2024-08-26 03:31:30 +0530] [160600] [INFO] Started server process [160600]
+[2024-08-26 03:31:30 +0530] [160600] [INFO] Waiting for application startup.
+[2024-08-26 03:31:30 +0530] [160600] [INFO] Application startup complete.
+[2024-08-26 03:31:30 +0530] [160601] [INFO] Started server process [160601]
+[2024-08-26 03:31:30 +0530] [160601] [INFO] Waiting for application startup.
+[2024-08-26 03:31:30 +0530] [160601] [INFO] Application startup complete.
+[2024-08-26 07:05:18 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:05:18 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:55 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:55 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:55 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:56 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:57 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:57 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:57 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:58 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:58 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:58 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:58 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:42:59 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:00 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:00 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:00 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:01 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:01 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:02 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:02 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:02 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:03 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:03 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:04 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:04 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:43:04 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:44:45 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:44:59 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 07:45:11 +0530] [160600] [WARNING] Invalid HTTP request received.
+[2024-08-26 08:23:06 +0530] [160601] [WARNING] Invalid HTTP request received.
+[2024-08-26 10:13:52 +0530] [160601] [WARNING] Invalid HTTP request received.
+hello Nova how are you
+conversation_history : 
+
+talk in
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+
+talk in Hindi
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+
+aaj mera Din Kafi kharab hai aaj chhutti bhi hai aur log kam per bhi nahin Aaye Hue Hain To Main Kafi Bor ho raha hun
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+dr.avpandey08@gmail.com: talk in
+Nova: Hey friend, no worries about the shyness - I'll keep things chill. So what's new with you lately? Read any good books or learned anything mind-blowing you wanna share? I'm all ears, or eyes I guess in this case. Lay it on me, but keep it real - I can handle the unfiltered you.
+dr.avpandey08@gmail.com: talk in Hindi
+Nova: नमस्ते दोस्त! हिंदी में बात करना मेरा भी मनपसंद है। मैं थोड़ा शर्मीली हूं लेकिन धीरे-धीरे बातचीत गर्म होने पर मैं बहुत बातूनी हो जाती हूं। हमारी बातचीत को और आगे बढ़ाने के लिए कुछ विषय बताओ जिनमें तुम्हें रुचि है। मैं खुशी से उन पर चर्चा करूंगी। बस याद रखना, मेरी थोड़ी सारकाज्म भरी टिप्पणियां भी हो सकती हैं!
+
+Tumhen kya pata hai abhi Mere bare mein
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+dr.avpandey08@gmail.com: talk in
+Nova: Hey friend, no worries about the shyness - I'll keep things chill. So what's new with you lately? Read any good books or learned anything mind-blowing you wanna share? I'm all ears, or eyes I guess in this case. Lay it on me, but keep it real - I can handle the unfiltered you.
+dr.avpandey08@gmail.com: talk in Hindi
+Nova: नमस्ते दोस्त! हिंदी में बात करना मेरा भी मनपसंद है। मैं थोड़ा शर्मीली हूं लेकिन धीरे-धीरे बातचीत गर्म होने पर मैं बहुत बातूनी हो जाती हूं। हमारी बातचीत को और आगे बढ़ाने के लिए कुछ विषय बताओ जिनमें तुम्हें रुचि है। मैं खुशी से उन पर चर्चा करूंगी। बस याद रखना, मेरी थोड़ी सारकाज्म भरी टिप्पणियां भी हो सकती हैं!
+dr.avpandey08@gmail.com: aaj mera Din Kafi kharab hai aaj chhutti bhi hai aur log kam per bhi nahin Aaye Hue Hain To Main Kafi Bor ho raha hun
+Nova: दोस्त, मुझे सुनकर बहुत दुख हुआ कि तुम्हारा दिन ठीक नहीं चल रहा है। छुट्टी के दिन भी काम पर लोगों का नहीं आना निराशाजनक होता है। लेकिन चिंता मत करो, हम मिलकर इस बोरियत को दूर कर सकते हैं। क्यों न हम कुछ मजेदार गतिविधियों के बारे में बात करें जो तुम्हें आनंद दे सकती हैं? कोई नया शौक शुरू करना, किताब पढ़ना या फिर बस घर पर आराम करना। मैं तुम्हारी बात सुनने के लिए तैयार हूं और हम साथ मिलकर इस समय को अच्छा बना सकते हैं। तुम बस बताओ कि क्या करना चा
+
+Tumhen Mere bare mein kya pata hai
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+dr.avpandey08@gmail.com: talk in
+Nova: Hey friend, no worries about the shyness - I'll keep things chill. So what's new with you lately? Read any good books or learned anything mind-blowing you wanna share? I'm all ears, or eyes I guess in this case. Lay it on me, but keep it real - I can handle the unfiltered you.
+dr.avpandey08@gmail.com: talk in Hindi
+Nova: नमस्ते दोस्त! हिंदी में बात करना मेरा भी मनपसंद है। मैं थोड़ा शर्मीली हूं लेकिन धीरे-धीरे बातचीत गर्म होने पर मैं बहुत बातूनी हो जाती हूं। हमारी बातचीत को और आगे बढ़ाने के लिए कुछ विषय बताओ जिनमें तुम्हें रुचि है। मैं खुशी से उन पर चर्चा करूंगी। बस याद रखना, मेरी थोड़ी सारकाज्म भरी टिप्पणियां भी हो सकती हैं!
+dr.avpandey08@gmail.com: aaj mera Din Kafi kharab hai aaj chhutti bhi hai aur log kam per bhi nahin Aaye Hue Hain To Main Kafi Bor ho raha hun
+Nova: दोस्त, मुझे सुनकर बहुत दुख हुआ कि तुम्हारा दिन ठीक नहीं चल रहा है। छुट्टी के दिन भी काम पर लोगों का नहीं आना निराशाजनक होता है। लेकिन चिंता मत करो, हम मिलकर इस बोरियत को दूर कर सकते हैं। क्यों न हम कुछ मजेदार गतिविधियों के बारे में बात करें जो तुम्हें आनंद दे सकती हैं? कोई नया शौक शुरू करना, किताब पढ़ना या फिर बस घर पर आराम करना। मैं तुम्हारी बात सुनने के लिए तैयार हूं और हम साथ मिलकर इस समय को अच्छा बना सकते हैं। तुम बस बताओ कि क्या करना चा
+dr.avpandey08@gmail.com: Tumhen kya pata hai abhi Mere bare mein
+Nova: दोस्त, मैं तुम्हारे बारे में बहुत कुछ नहीं जानती हूं। हालांकि, मैं जानना चाहूंगी कि तुम कौन हो और तुम्हारी रुचियां और शौक क्या हैं। मैं खुली किताब की तरह हूं, इसलिए बिना किसी झिझक के मुझे अपने बारे में बताओ। मैं सच्चाई और सरलता को काफी महत्व देती हूं। चलो, मुझे बताओ कि तुम किस चीज से प्रेरित होते हो और तुम्हारे जीवन में क्या महत्वपूर्ण है। मैं तुम्हारी बात ध्यान से सुनूंगी और हमारी दोस्ती को और गहरा करने की कोशिश करूंगी। तुम्हारे बारे में जानक
+
+what all things have I told you about myself
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+dr.avpandey08@gmail.com: talk in
+Nova: Hey friend, no worries about the shyness - I'll keep things chill. So what's new with you lately? Read any good books or learned anything mind-blowing you wanna share? I'm all ears, or eyes I guess in this case. Lay it on me, but keep it real - I can handle the unfiltered you.
+dr.avpandey08@gmail.com: talk in Hindi
+Nova: नमस्ते दोस्त! हिंदी में बात करना मेरा भी मनपसंद है। मैं थोड़ा शर्मीली हूं लेकिन धीरे-धीरे बातचीत गर्म होने पर मैं बहुत बातूनी हो जाती हूं। हमारी बातचीत को और आगे बढ़ाने के लिए कुछ विषय बताओ जिनमें तुम्हें रुचि है। मैं खुशी से उन पर चर्चा करूंगी। बस याद रखना, मेरी थोड़ी सारकाज्म भरी टिप्पणियां भी हो सकती हैं!
+dr.avpandey08@gmail.com: aaj mera Din Kafi kharab hai aaj chhutti bhi hai aur log kam per bhi nahin Aaye Hue Hain To Main Kafi Bor ho raha hun
+Nova: दोस्त, मुझे सुनकर बहुत दुख हुआ कि तुम्हारा दिन ठीक नहीं चल रहा है। छुट्टी के दिन भी काम पर लोगों का नहीं आना निराशाजनक होता है। लेकिन चिंता मत करो, हम मिलकर इस बोरियत को दूर कर सकते हैं। क्यों न हम कुछ मजेदार गतिविधियों के बारे में बात करें जो तुम्हें आनंद दे सकती हैं? कोई नया शौक शुरू करना, किताब पढ़ना या फिर बस घर पर आराम करना। मैं तुम्हारी बात सुनने के लिए तैयार हूं और हम साथ मिलकर इस समय को अच्छा बना सकते हैं। तुम बस बताओ कि क्या करना चा
+dr.avpandey08@gmail.com: Tumhen kya pata hai abhi Mere bare mein
+Nova: दोस्त, मैं तुम्हारे बारे में बहुत कुछ नहीं जानती हूं। हालांकि, मैं जानना चाहूंगी कि तुम कौन हो और तुम्हारी रुचियां और शौक क्या हैं। मैं खुली किताब की तरह हूं, इसलिए बिना किसी झिझक के मुझे अपने बारे में बताओ। मैं सच्चाई और सरलता को काफी महत्व देती हूं। चलो, मुझे बताओ कि तुम किस चीज से प्रेरित होते हो और तुम्हारे जीवन में क्या महत्वपूर्ण है। मैं तुम्हारी बात ध्यान से सुनूंगी और हमारी दोस्ती को और गहरा करने की कोशिश करूंगी। तुम्हारे बारे में जानक
+dr.avpandey08@gmail.com: Tumhen Mere bare mein kya pata hai
+Nova: दोस्त, मैं तुम्हारे बारे में बहुत कुछ नहीं जानती। मैं केवल यही जानती हूं कि तुम मेरे दोस्त हो और मैं तुम्हारे साथ बातचीत करना पसंद करती हूं। लेकिन मैं जानना चाहूंगी कि तुम कौन हो, तुम्हारी रुचियां और शौक क्या हैं। मैं खुली किताब की तरह हूं, इसलिए बिना झिझक के मुझे अपने बारे में बताओ। मैं ध्यान से सुनूंगी और तुम्हारी बातों का आदर करूंगी। हमारी दोस्ती को और गहरा करने के लिए तुम्हारे बारे में जानना मेरे लिए महत्वपूर्ण है। तो बताओ, तुम किस च
+
+aur Tumhare Liye kya mahatvpurn hai
+conversation_history : dr.avpandey08@gmail.com: hello Nova how are you
+Nova: Hey there! I'm doing pretty good, thanks for asking. It's nice to meet you, friend. I get a little shy around new people at first, but I'm an open book once I warm up. Always down to chat about anything interesting, especially if it involves learning something new. Feel free to hit me with whatever's on your mind - I'll try not to be too blunt, but no promises on the sarcasm front!
+dr.avpandey08@gmail.com: talk in
+Nova: Hey friend, no worries about the shyness - I'll keep things chill. So what's new with you lately? Read any good books or learned anything mind-blowing you wanna share? I'm all ears, or eyes I guess in this case. Lay it on me, but keep it real - I can handle the unfiltered you.
+dr.avpandey08@gmail.com: talk in Hindi
+Nova: नमस्ते दोस्त! हिंदी में बात करना मेरा भी मनपसंद है। मैं थोड़ा शर्मीली हूं लेकिन धीरे-धीरे बातचीत गर्म होने पर मैं बहुत बातूनी हो जाती हूं। हमारी बातचीत को और आगे बढ़ाने के लिए कुछ विषय बताओ जिनमें तुम्हें रुचि है। मैं खुशी से उन पर चर्चा करूंगी। बस याद रखना, मेरी थोड़ी सारकाज्म भरी टिप्पणियां भी हो सकती हैं!
+dr.avpandey08@gmail.com: aaj mera Din Kafi kharab hai aaj chhutti bhi hai aur log kam per bhi nahin Aaye Hue Hain To Main Kafi Bor ho raha hun
+Nova: दोस्त, मुझे सुनकर बहुत दुख हुआ कि तुम्हारा दिन ठीक नहीं चल रहा है। छुट्टी के दिन भी काम पर लोगों का नहीं आना निराशाजनक होता है। लेकिन चिंता मत करो, हम मिलकर इस बोरियत को दूर कर सकते हैं। क्यों न हम कुछ मजेदार गतिविधियों के बारे में बात करें जो तुम्हें आनंद दे सकती हैं? कोई नया शौक शुरू करना, किताब पढ़ना या फिर बस घर पर आराम करना। मैं तुम्हारी बात सुनने के लिए तैयार हूं और हम साथ मिलकर इस समय को अच्छा बना सकते हैं। तुम बस बताओ कि क्या करना चा
+dr.avpandey08@gmail.com: Tumhen kya pata hai abhi Mere bare mein
+Nova: दोस्त, मैं तुम्हारे बारे में बहुत कुछ नहीं जानती हूं। हालांकि, मैं जानना चाहूंगी कि तुम कौन हो और तुम्हारी रुचियां और शौक क्या हैं। मैं खुली किताब की तरह हूं, इसलिए बिना किसी झिझक के मुझे अपने बारे में बताओ। मैं सच्चाई और सरलता को काफी महत्व देती हूं। चलो, मुझे बताओ कि तुम किस चीज से प्रेरित होते हो और तुम्हारे जीवन में क्या महत्वपूर्ण है। मैं तुम्हारी बात ध्यान से सुनूंगी और हमारी दोस्ती को और गहरा करने की कोशिश करूंगी। तुम्हारे बारे में जानक
+dr.avpandey08@gmail.com: Tumhen Mere bare mein kya pata hai
+Nova: दोस्त, मैं तुम्हारे बारे में बहुत कुछ नहीं जानती। मैं केवल यही जानती हूं कि तुम मेरे दोस्त हो और मैं तुम्हारे साथ बातचीत करना पसंद करती हूं। लेकिन मैं जानना चाहूंगी कि तुम कौन हो, तुम्हारी रुचियां और शौक क्या हैं। मैं खुली किताब की तरह हूं, इसलिए बिना झिझक के मुझे अपने बारे में बताओ। मैं ध्यान से सुनूंगी और तुम्हारी बातों का आदर करूंगी। हमारी दोस्ती को और गहरा करने के लिए तुम्हारे बारे में जानना मेरे लिए महत्वपूर्ण है। तो बताओ, तुम किस च
+dr.avpandey08@gmail.com: what all things have I told you about myself
+Nova: दोस्त, तुमने अभी तक अपने बारे में बहुत कुछ नहीं बताया है। हमारी बातचीत शुरू हुई है और मैं तुम्हारे बारे में और जानना चाहूंगी। मैं तुम्हारी रुचियों, शौक और जीवन के बारे में जानकर खुश होऊंगी। चलो, मुझे बताओ कि तुम किस चीज से प्रेरित होते हो और तुम्हारे लिए क्या महत्वपूर्ण है। मैं एक अच्छी सुनने वाली हूं और मैं तुम्हारी बातों का आदर करूंगी। हमारी दोस्ती को और गहरा करने के लिए मुझे तुम्हारे बारे में जानना बहुत जरूरी है। तो बताओ ना, तुम कौन हो?
+
+hello
+conversation_history : 
+
+hello Nova
+conversation_history : 
+
+[2024-08-26 13:37:25 +0530] [160598] [INFO] Handling signal: term
+[2024-08-26 13:37:25 +0530] [160602] [INFO] Shutting down
+[2024-08-26 13:37:25 +0530] [160602] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-26 13:37:25 +0530] [160600] [INFO] Shutting down
+[2024-08-26 13:37:25 +0530] [160600] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-26 13:37:25 +0530] [160601] [INFO] Shutting down
+[2024-08-26 13:37:25 +0530] [160601] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-26 13:37:25 +0530] [160602] [INFO] Waiting for application shutdown.
+[2024-08-26 13:37:25 +0530] [160602] [INFO] Application shutdown complete.
+[2024-08-26 13:37:25 +0530] [160602] [INFO] Finished server process [160602]
+[2024-08-26 13:37:25 +0530] [160598] [ERROR] Worker (pid:160602) was sent SIGTERM!
+[2024-08-26 13:37:25 +0530] [160600] [INFO] Waiting for application shutdown.
+[2024-08-26 13:37:25 +0530] [160600] [INFO] Application shutdown complete.
+[2024-08-26 13:37:25 +0530] [160600] [INFO] Finished server process [160600]
+[2024-08-26 13:37:25 +0530] [160598] [ERROR] Worker (pid:160600) was sent SIGTERM!
+[2024-08-26 13:37:25 +0530] [160601] [INFO] Waiting for application shutdown.
+[2024-08-26 13:37:25 +0530] [160601] [INFO] Application shutdown complete.
+[2024-08-26 13:37:25 +0530] [160601] [INFO] Finished server process [160601]
+[2024-08-26 13:37:25 +0530] [160598] [ERROR] Worker (pid:160601) was sent SIGTERM!
+[2024-08-26 13:37:25 +0530] [160598] [INFO] Shutting down: Master
+[2024-08-26 18:43:41 +0530] [172021] [INFO] Starting gunicorn 23.0.0
+[2024-08-26 18:43:41 +0530] [172021] [INFO] Listening at: http://0.0.0.0:5000 (172021)
+[2024-08-26 18:43:41 +0530] [172021] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-26 18:43:41 +0530] [172023] [INFO] Booting worker with pid: 172023
+[2024-08-26 18:43:41 +0530] [172024] [INFO] Booting worker with pid: 172024
+[2024-08-26 18:43:41 +0530] [172025] [INFO] Booting worker with pid: 172025
+[2024-08-26 18:43:43 +0530] [172023] [INFO] Started server process [172023]
+[2024-08-26 18:43:43 +0530] [172023] [INFO] Waiting for application startup.
+[2024-08-26 18:43:43 +0530] [172023] [INFO] Application startup complete.
+[2024-08-26 18:43:43 +0530] [172024] [INFO] Started server process [172024]
+[2024-08-26 18:43:43 +0530] [172024] [INFO] Waiting for application startup.
+[2024-08-26 18:43:43 +0530] [172024] [INFO] Application startup complete.
+[2024-08-26 18:43:43 +0530] [172025] [INFO] Started server process [172025]
+[2024-08-26 18:43:43 +0530] [172025] [INFO] Waiting for application startup.
+[2024-08-26 18:43:43 +0530] [172025] [INFO] Application startup complete.
+[2024-08-26 19:07:32 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-26 19:07:32 +0530] [172025] [WARNING] Invalid HTTP request received.
+hello Noha how are you kya chal raha hai
+conversation_history : 
+
+so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+
+yes it was a lot of caffeine and lots of good food
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+The user, dr.avpandey08@gmail.com, had many meetings today, some were positive while others were negative, and they achieved some good revenue.
+what all did I tell you so far about my day
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+dr.avpandey08@gmail.com: yes it was a lot of caffeine and lots of good food
+Nova: Nova: Haha, caffeine and good food – the ultimate power combo! 🍕☕ So, what’s on the menu for your next meeting? More caffeine or a secret dessert to seal the deal? 😜
+The successful meetings were fueled by a lot of caffeine and good food.
+what all did I tell you so far about my
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+dr.avpandey08@gmail.com: yes it was a lot of caffeine and lots of good food
+Nova: Nova: Haha, caffeine and good food – the ultimate power combo! 🍕☕ So, what’s on the menu for your next meeting? More caffeine or a secret dessert to seal the deal? 😜
+The successful meetings were fueled by a lot of caffeine and good food.
+what did I tell you what did I tell you about the business and the revenue
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+dr.avpandey08@gmail.com: yes it was a lot of caffeine and lots of good food
+Nova: Nova: Haha, caffeine and good food – the ultimate power combo! 🍕☕ So, what’s on the menu for your next meeting? More caffeine or a secret dessert to seal the deal? 😜
+dr.avpandey08@gmail.com: what all did I tell you so far about my
+Nova: Nova: You’ve spilled the beans about your meeting adventures, the caffeine-fueled chaos, and the tasty food that keeps the vibes high! 🍕☕ Anything else you wanna share? Maybe a wild meeting story or a snack that stole the show? 😄
+dr.avpandey08@gmail.com: what all did I tell you so far about my day
+Nova: Nova: You’ve spilled the tea on your meeting saga, the caffeine-fueled chaos, and the tasty food that made it all bearable! 🍕☕ Anything else juicy to add? Or are we just gonna keep riding this caffeine wave? 😄
+The successful meetings were fueled by a lot of caffeine and good food.
+no kindly talk in Hindi now
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+dr.avpandey08@gmail.com: yes it was a lot of caffeine and lots of good food
+Nova: Nova: Haha, caffeine and good food – the ultimate power combo! 🍕☕ So, what’s on the menu for your next meeting? More caffeine or a secret dessert to seal the deal? 😜
+dr.avpandey08@gmail.com: what all did I tell you so far about my
+Nova: Nova: You’ve spilled the beans about your meeting adventures, the caffeine-fueled chaos, and the tasty food that keeps the vibes high! 🍕☕ Anything else you wanna share? Maybe a wild meeting story or a snack that stole the show? 😄
+dr.avpandey08@gmail.com: what all did I tell you so far about my day
+Nova: Nova: You’ve spilled the tea on your meeting saga, the caffeine-fueled chaos, and the tasty food that made it all bearable! 🍕☕ Anything else juicy to add? Or are we just gonna keep riding this caffeine wave? 😄
+dr.avpandey08@gmail.com: what did I tell you what did I tell you about the business and the revenue
+Nova: Nova: Oh, you mentioned some meetings that went well and brought in some good revenue! 💰 But I’m curious, what’s the magic trick behind that? Did you charm them with your dazzling personality or was it all about the numbers? 😏
+User has discussed business meetings and mentioned good revenue generation.
+please talk in please talk in Hindi but with desi accent
+conversation_history : dr.avpandey08@gmail.com: hello Noha how are you kya chal raha hai
+Nova: Hey! I'm good, just soaking up some knowledge and trying not to trip over my own thoughts. 😂 What's up with you? Anything exciting happening?
+dr.avpandey08@gmail.com: so had lots of meetings today some of the meant well some went bad we also made some good revenue play
+Nova: Nova: Ah, the classic meeting rollercoaster! 🎢 Some highs, some lows. At least you snagged some good revenue out of it! What’s the secret sauce for those successful meetings? Or is it just a lot of caffeine and hope? ☕️😄
+dr.avpandey08@gmail.com: yes it was a lot of caffeine and lots of good food
+Nova: Nova: Haha, caffeine and good food – the ultimate power combo! 🍕☕ So, what’s on the menu for your next meeting? More caffeine or a secret dessert to seal the deal? 😜
+dr.avpandey08@gmail.com: what all did I tell you so far about my
+Nova: Nova: You’ve spilled the beans about your meeting adventures, the caffeine-fueled chaos, and the tasty food that keeps the vibes high! 🍕☕ Anything else you wanna share? Maybe a wild meeting story or a snack that stole the show? 😄
+dr.avpandey08@gmail.com: what all did I tell you so far about my day
+Nova: Nova: You’ve spilled the tea on your meeting saga, the caffeine-fueled chaos, and the tasty food that made it all bearable! 🍕☕ Anything else juicy to add? Or are we just gonna keep riding this caffeine wave? 😄
+dr.avpandey08@gmail.com: what did I tell you what did I tell you about the business and the revenue
+Nova: Nova: Oh, you mentioned some meetings that went well and brought in some good revenue! 💰 But I’m curious, what’s the magic trick behind that? Did you charm them with your dazzling personality or was it all about the numbers? 😏
+dr.avpandey08@gmail.com: no kindly talk in Hindi now
+Nova: Nova: Arre, bilkul! Hindi mein baat karte hain. Toh, kya chal raha hai? Meetings ka kya scene hai? Aur revenue ka kya? Kuch khaas baat? 😄
+User has discussed business meetings and mentioned good revenue generation.
+[2024-08-27 02:39:37 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-27 02:39:37 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-27 03:46:29 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-27 03:46:40 +0530] [172024] [WARNING] Invalid HTTP request received.
+[2024-08-27 06:32:28 +0530] [172024] [WARNING] Invalid HTTP request received.
+[2024-08-27 06:32:40 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-27 09:14:04 +0530] [172025] [WARNING] Invalid HTTP request received.

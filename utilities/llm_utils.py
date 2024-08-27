@@ -27,7 +27,7 @@ bedrock_client = boto3.client(
     service_name='bedrock-runtime',
     aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
     aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'),
-    region_name='ap-south-1',
+    region_name='us-east-1',
 )
 
 class MemoryResponse(BaseModel):
@@ -125,15 +125,15 @@ def groq_response(prompt_list : list, structured = False):
 def claude_3_5_sonnet_response(prompt_list : list):
     messages = convert_openai_to_claude(prompt_list)
 
-    model_id = "anthropic.claude-3-sonnet-20240229-v1:0"  # Claude 3 Sonnet model
+    model_id = "anthropic.claude-3-5-sonnet-20240620-v1:0"  # Claude 3.5 Sonnet model
     body = json.dumps({
         "messages": messages,
-        "max_tokens": 300,
-        "temperature": 0.7,
+        "max_tokens": 200000,
+        "temperature": 0.3,
         "top_p": 1,
         "top_k": 250,
         "anthropic_version": "bedrock-2023-05-31"
-    })
+    })  
 
     # Make the API call
     response = bedrock_client.invoke_model(

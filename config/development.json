@@ -2,7 +2,8 @@
     "global_path": "/hci",
     "openai_model": "gpt-4o-mini",
     "buddy_name": "Nova",
-    "reply_model_name": "openai",
-    "memory_model_name": "openai",
+    "reply_model_name": "groq",
+    "memory_model_name": "groq",
+    "summary_model_name": "openai",
     "database_url": "postgresql://nishant:nova123456@localhost:5432/nova_db"
 }

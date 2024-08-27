@@ -49,6 +49,13 @@ class Conversation(Base):
     message = Column(Text, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
+# Summary model
+class Summary(Base):
+    __tablename__ = 'summary'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(String(100), unique=True, nullable=False)
+    summary = Column(Text, nullable=False)
+
 #Instantiate a database Session =========================================================
 
 engine = create_engine(config['database_url'])
@@ -181,3 +188,30 @@ def store_conversation(db: Session, user_id: str, role: str, message: str):
 def get_conversation(db: Session, user_id: str):
     return db.query(Conversation).filter(Conversation.user_id == user_id).order_by(Conversation.timestamp).all()
 
+# Add or update summary for a user
+def upsert_summary(user_id: str, summary: str, db: Session):
+    return store_summary(db=db, user_id=user_id, summary=summary)
+
+# Get summary for a user
+def get_user_summary(user_id: str, db: Session):
+    summary = retrieve_summary(db=db, user_id=user_id)
+    if summary is None:
+        return ""
+    return summary
+
+# Store or update summary for a user
+def store_summary(db: Session, user_id: str, summary: str):
+    db_summary = db.query(Summary).filter(Summary.user_id == user_id).first()
+    if db_summary:
+        db_summary.summary = summary
+    else:
+        db_summary = Summary(user_id=user_id, summary=summary)
+        db.add(db_summary)
+    db.commit()
+    db.refresh(db_summary)
+    return db_summary
+
+# Retrieve summary for a user
+def retrieve_summary(db: Session, user_id: str):
+    summary_record = db.query(Summary).filter(Summary.user_id == user_id).first()
+    return summary_record.summary if summary_record else None

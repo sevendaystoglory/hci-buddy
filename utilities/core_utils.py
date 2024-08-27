@@ -51,6 +51,24 @@ def remove_emojis(text):
         return emoji_pattern.sub(r'', text)
     else:
         return text
+
+def truncate_conversation(conversation: str, word_limit: int = 1000) -> str:
+    """
+    Returns the last 'word_limit' words of a given conversation string.
+
+    Args:
+    conversation (str): The input conversation string.
+    word_limit (int): The maximum number of words to keep. Defaults to 1000.
+
+    Returns:
+    str: The truncated conversation string containing the last 'word_limit' words.
+    """
+    words = conversation.split()
+    if len(words) <= word_limit:
+        return conversation
+    else:
+        return ' '.join(words[-word_limit:])
+
 def remove_prefixes(text, prefixes: list):
     """
     Remove specified prefixes from the beginning of the text or dictionary values.
@@ -77,25 +95,29 @@ def generate_new_user_id():
     uuid_str = str(uuid.uuid4()).replace('-', '')
     return f"user_{uuid_str[:32]}"
 
-def generate_final_prompt(user_name: str, memory: str, user_utterance: str, conversation: str, buddy_name: str):
+def generate_final_prompt(user_id: str, user_name: str, memory: str, user_utterance: str, conversation: str, buddy_name: str, user_summary : str):
     prompt_template = load_text_file('utilities/prompts/final_prompt_template.txt')
+
+    if conversation: #conversation is non empty
+        truncated_conversation =  f"""The following is a conversation of you and {user_name}, for context:
+        {truncate_conversation(conversation = conversation, word_limit = 1000)}
+        """
+    else:
+        truncated_conversation = ""
 
     if memory:
         memory = f"""The following is a memory about {user_name}. It contains experiences and opinions.
         {memory}
         """
 
-    if conversation:
-        conversation = f"""The following is a conversation of you and {user_name}, for context:
-        {conversation}
-        """
+    memory_and_summary = memory + "\n" + user_summary
 
     prompt = prompt_template.format(
         user_name=user_name,
-        memory=memory,
+        memory_and_summary=memory_and_summary,
         buddy_name=buddy_name,
-        conversation=conversation,
         user_utterance=user_utterance
+        # truncated_conversation=truncated_conversation,
     )
     return prompt
 

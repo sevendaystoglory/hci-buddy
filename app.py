@@ -126,7 +126,7 @@ async def generate_text(data: InputData, db: Session = Depends(get_db)):
         
         # Call generate_summary_and_insights after returning the response
         await generate_summary_and_insights(user_id=user_id, db=db, conversation=conversation_history)
-        print(response)
+        print(reply)
         return response
     else:
         return JSONResponse(status_code=400, content={"message": "Invalid input"})

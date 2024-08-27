@@ -98,7 +98,7 @@ def user_login(email: str, password: str, db: Session):
         return JSONResponse(status_code=400, content={"message": "Incorrect passowrd"})
 
     # If both email and password match, return the user_id
-    return {"user_id": user.user_id}    
+    return {"user_id": user.user_id, "user_name": user.name}    
 
 
 # Read user by user_id
@@ -173,8 +173,10 @@ def store_memory(db: Session, user_id: str, memory: str):
 
 # Retrieve memory for a user
 def get_memory(db: Session, user_id: str):
-    memory_record = db.query(Memory).filter(Memory.user_id == user_id).first()
-    return memory_record.memory if memory_record else ""
+    memory_records = db.query(Memory).filter(Memory.user_id == user_id).all()
+    if not memory_records:
+        return ""
+    return " ".join(record.memory for record in memory_records)
 
 # Store a conversation message
 def store_conversation(db: Session, user_id: str, role: str, message: str):

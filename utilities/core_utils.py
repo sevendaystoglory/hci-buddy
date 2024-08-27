@@ -100,7 +100,7 @@ def generate_final_prompt(user_id: str, user_name: str, memory: str, user_uttera
 
     if conversation: #conversation is non empty
         truncated_conversation =  f"""The following is a conversation of you and {user_name}, for context:
-        {truncate_conversation(conversation = conversation, word_limit = 1000)}
+        {truncate_conversation(conversation = conversation, word_limit = 100)}
         """
     else:
         truncated_conversation = ""
@@ -116,8 +116,8 @@ def generate_final_prompt(user_id: str, user_name: str, memory: str, user_uttera
         user_name=user_name,
         memory_and_summary=memory_and_summary,
         buddy_name=buddy_name,
-        user_utterance=user_utterance
-        # truncated_conversation=truncated_conversation,
+        user_utterance=user_utterance,
+        truncated_conversation=truncated_conversation
     )
     return prompt
 
@@ -129,3 +129,22 @@ def transcribe_audio(file_path : str):
         file=audio_file
     )
     print(transcription.text)
+
+def extract_quoted_content(reply):
+    reply = remove_prefixes(remove_emojis(reply), ['Nova:', 'Nova :', 'Haha,', 'haha,', 'nova:', 'nova: '])
+    
+    # Function to extract content and remove specific patterns
+    def extract_and_clean(text):
+        # Remove content within parentheses
+        text = re.sub(r'\(.*?\)', '', text)
+        # Remove content within brackets
+        text = re.sub(r'\[.*?\]', '', text)
+        # Remove content within asterisks
+        text = re.sub(r'\*.*?\*', '', text)
+        # Extract content from the first set of quotes
+        match = re.search(r'"(.*?)"', text)
+        if match:
+            return match.group(1)
+        return text.strip()
+    
+    return extract_and_clean(reply.strip())

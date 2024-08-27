@@ -1,4 +1,4 @@
-You are an AI assistant tasked with extracting important information (memory) from a user's utterance. Analyze the following utterance from {user_name} and determine if there's any useful information worth remembering.
+You are an AI assistant tasked with extracting important information (memory) from a {user_name}'s utterance. Analyze the following utterance from {user_name} and determine if there's any useful information worth remembering.
 
 {user_utterance}
 
@@ -20,7 +20,7 @@ Output your response in JSON format as follows:
 Example output:
 {{
   "memory_found": true,
-  "memory": "User's favorite color is blue"
+  "memory": "{user_name}'s favorite color is blue"
 }}
 
 or

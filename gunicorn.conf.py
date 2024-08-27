@@ -9,7 +9,7 @@ import multiprocessing
 wsgi_app = "application:app"
 
 # Server socket
-bind = "0.0.0.0:5000"
+bind = "0.0.0.0:6000"
 backlog = 2048
 
 # Worker processes

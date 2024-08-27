@@ -56,7 +56,7 @@ def openai_response(prompt_list : list, structured = False):
 
     else:
         completion = openai_client.chat.completions.create(
-            model = config['openai_model'],
+            model = 'gpt-3.5-turbo',
             messages = prompt_list,
             temperature = 0.2
         )

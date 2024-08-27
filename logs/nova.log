@@ -381,3 +381,421 @@ User has discussed business meetings and mentioned good revenue generation.
 [2024-08-27 09:14:04 +0530] [172025] [WARNING] Invalid HTTP request received.
 [2024-08-27 11:49:06 +0530] [172024] [WARNING] Invalid HTTP request received.
 [2024-08-27 13:33:18 +0530] [172025] [WARNING] Invalid HTTP request received.
+[2024-08-27 16:32:05 +0530] [172021] [INFO] Handling signal: term
+[2024-08-27 16:32:05 +0530] [172023] [INFO] Shutting down
+[2024-08-27 16:32:05 +0530] [172023] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:32:05 +0530] [172024] [INFO] Shutting down
+[2024-08-27 16:32:05 +0530] [172024] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:32:05 +0530] [172025] [INFO] Shutting down
+[2024-08-27 16:32:05 +0530] [172025] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:32:05 +0530] [172023] [INFO] Waiting for application shutdown.
+[2024-08-27 16:32:05 +0530] [172023] [INFO] Application shutdown complete.
+[2024-08-27 16:32:05 +0530] [172023] [INFO] Finished server process [172023]
+[2024-08-27 16:32:05 +0530] [172024] [INFO] Waiting for application shutdown.
+[2024-08-27 16:32:05 +0530] [172024] [INFO] Application shutdown complete.
+[2024-08-27 16:32:05 +0530] [172024] [INFO] Finished server process [172024]
+[2024-08-27 16:32:05 +0530] [172025] [INFO] Waiting for application shutdown.
+[2024-08-27 16:32:05 +0530] [172025] [INFO] Application shutdown complete.
+[2024-08-27 16:32:05 +0530] [172025] [INFO] Finished server process [172025]
+[2024-08-27 16:32:05 +0530] [172021] [ERROR] Worker (pid:172024) was sent SIGTERM!
+[2024-08-27 16:32:05 +0530] [172021] [ERROR] Worker (pid:172023) was sent SIGTERM!
+[2024-08-27 16:32:05 +0530] [172021] [ERROR] Worker (pid:172025) was sent SIGTERM!
+[2024-08-27 16:32:05 +0530] [172021] [INFO] Shutting down: Master
+[2024-08-27 16:32:10 +0530] [210842] [INFO] Starting gunicorn 23.0.0
+[2024-08-27 16:32:10 +0530] [210842] [INFO] Listening at: http://0.0.0.0:6000 (210842)
+[2024-08-27 16:32:10 +0530] [210842] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-27 16:32:10 +0530] [210844] [INFO] Booting worker with pid: 210844
+[2024-08-27 16:32:10 +0530] [210845] [INFO] Booting worker with pid: 210845
+[2024-08-27 16:32:10 +0530] [210846] [INFO] Booting worker with pid: 210846
+[2024-08-27 16:32:12 +0530] [210846] [INFO] Started server process [210846]
+[2024-08-27 16:32:12 +0530] [210846] [INFO] Waiting for application startup.
+[2024-08-27 16:32:12 +0530] [210846] [INFO] Application startup complete.
+[2024-08-27 16:32:12 +0530] [210844] [INFO] Started server process [210844]
+[2024-08-27 16:32:12 +0530] [210844] [INFO] Waiting for application startup.
+[2024-08-27 16:32:12 +0530] [210844] [INFO] Application startup complete.
+[2024-08-27 16:32:12 +0530] [210845] [INFO] Started server process [210845]
+[2024-08-27 16:32:12 +0530] [210845] [INFO] Waiting for application startup.
+[2024-08-27 16:32:12 +0530] [210845] [INFO] Application startup complete.
+hey
+conversation_history : 
+Retrieved Memory: 
+Yo! What's up?
+how are you
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Retrieved Memory: 
+Meh, surviving. You?
+Write a short poem for me
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Retrieved Memory: 
+Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+kya tum Hindi mein baat kar sakte ho
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Retrieved Memory: 
+Haan, kyun nahi? Kya scene hai?
+Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Retrieved Memory: Atif can communicate in Hindi.
+India Gate. Iconic and chill.
+Achcha
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Retrieved Memory: Atif can communicate in Hindi.
+Kya hua, bhai?
+Tumhari hobbies kya hai
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Retrieved Memory: Atif can communicate in Hindi.
+Memes, music, and messing with you.
+okay what is your favourite festival
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Retrieved Memory: Atif can communicate in Hindi.
+Diwali, hands down. Lights, sweets, and no work!
+simulator boring
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Retrieved Memory: Atif can communicate in Hindi.
+Life's not a simulator, bro. What's really bugging you?
+actually I had a really bad accident yesterday
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Retrieved Memory: Atif can communicate in Hindi.
+Damn, you okay? What happened?
+so I got an hour by truck
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Atif: actually I had a really bad accident yesterday
+Nova: Damn, you okay? What happened?
+Retrieved Memory: Atif had a really bad accident yesterday.
+Truck ride? Sounds like a bumpy adventure. What's the plan?
+[2024-08-27 16:41:09 +0530] [210842] [INFO] Handling signal: term
+[2024-08-27 16:41:10 +0530] [210844] [INFO] Shutting down
+[2024-08-27 16:41:10 +0530] [210844] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:41:10 +0530] [210846] [INFO] Shutting down
+[2024-08-27 16:41:10 +0530] [210845] [INFO] Shutting down
+[2024-08-27 16:41:10 +0530] [210846] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:41:10 +0530] [210845] [INFO] Error while closing socket [Errno 9] Bad file descriptor
+[2024-08-27 16:41:10 +0530] [210844] [INFO] Waiting for application shutdown.
+[2024-08-27 16:41:10 +0530] [210844] [INFO] Application shutdown complete.
+[2024-08-27 16:41:10 +0530] [210844] [INFO] Finished server process [210844]
+[2024-08-27 16:41:10 +0530] [210846] [INFO] Waiting for application shutdown.
+[2024-08-27 16:41:10 +0530] [210846] [INFO] Application shutdown complete.
+[2024-08-27 16:41:10 +0530] [210846] [INFO] Finished server process [210846]
+[2024-08-27 16:41:10 +0530] [210845] [INFO] Waiting for application shutdown.
+[2024-08-27 16:41:10 +0530] [210845] [INFO] Application shutdown complete.
+[2024-08-27 16:41:10 +0530] [210845] [INFO] Finished server process [210845]
+[2024-08-27 16:41:10 +0530] [210842] [ERROR] Worker (pid:210846) was sent SIGTERM!
+[2024-08-27 16:41:10 +0530] [210842] [ERROR] Worker (pid:210844) was sent SIGTERM!
+[2024-08-27 16:41:10 +0530] [210842] [ERROR] Worker (pid:210845) was sent SIGTERM!
+[2024-08-27 16:41:10 +0530] [210842] [INFO] Shutting down: Master
+[2024-08-27 16:43:14 +0530] [211292] [INFO] Starting gunicorn 23.0.0
+[2024-08-27 16:43:14 +0530] [211292] [INFO] Listening at: http://0.0.0.0:6000 (211292)
+[2024-08-27 16:43:14 +0530] [211292] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-08-27 16:43:14 +0530] [211294] [INFO] Booting worker with pid: 211294
+[2024-08-27 16:43:14 +0530] [211295] [INFO] Booting worker with pid: 211295
+[2024-08-27 16:43:14 +0530] [211296] [INFO] Booting worker with pid: 211296
+[2024-08-27 16:43:16 +0530] [211295] [INFO] Started server process [211295]
+[2024-08-27 16:43:16 +0530] [211295] [INFO] Waiting for application startup.
+[2024-08-27 16:43:16 +0530] [211295] [INFO] Application startup complete.
+[2024-08-27 16:43:16 +0530] [211296] [INFO] Started server process [211296]
+[2024-08-27 16:43:16 +0530] [211296] [INFO] Waiting for application startup.
+[2024-08-27 16:43:16 +0530] [211296] [INFO] Application startup complete.
+[2024-08-27 16:43:16 +0530] [211294] [INFO] Started server process [211294]
+[2024-08-27 16:43:16 +0530] [211294] [INFO] Waiting for application startup.
+[2024-08-27 16:43:16 +0530] [211294] [INFO] Application startup complete.
+hello what are you doing
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Atif: actually I had a really bad accident yesterday
+Nova: Damn, you okay? What happened?
+Atif: so I got an hour by truck
+Nova: Truck ride? Sounds like a bumpy adventure. What's the plan?
+Retrieved Memory: Atif has to travel an hour by truck.
+Yo Atif! Just chilling, what's up with you?
+tell me something about yourself
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Atif: actually I had a really bad accident yesterday
+Nova: Damn, you okay? What happened?
+Atif: so I got an hour by truck
+Nova: Truck ride? Sounds like a bumpy adventure. What's the plan?
+Atif: hello what are you doing
+Nova: Yo Atif! Just chilling, what's up with you?
+Retrieved Memory: Atif has to travel an hour by truck.
+I'm a meme queen, music junkie, and your personal sarcasm supplier. What's next on your mind?
+what have we discuss up until now
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Atif: actually I had a really bad accident yesterday
+Nova: Damn, you okay? What happened?
+Atif: so I got an hour by truck
+Nova: Truck ride? Sounds like a bumpy adventure. What's the plan?
+Atif: hello what are you doing
+Nova: Yo Atif! Just chilling, what's up with you?
+Atif: tell me something about yourself
+Nova: I'm a meme queen, music junkie, and your personal sarcasm supplier. What's next on your mind?
+Retrieved Memory: Atif has to travel an hour by truck.
+We've covered Diwali, your accident, and my meme obsession. What's next, buddy?
+Aaj show what happened during my accident
+conversation_history : Atif: hey
+Nova: Yo! What's up?
+Atif: how are you
+Nova: Meh, surviving. You?
+Atif: Write a short poem for me
+Nova: Roses are red,
+Violets are blue,
+You're asking for poems,
+Got nothing better to do?
+Atif: kya tum Hindi mein baat kar sakte ho
+Nova: Haan, kyun nahi? Kya scene hai?
+Atif: Achcha To Tumhara manpasandida Sthan kya hai Delhi mein
+Nova: India Gate. Iconic and chill.
+Atif: Achcha
+Nova: Kya hua, bhai?
+Atif: Tumhari hobbies kya hai
+Nova: Memes, music, and messing with you.
+Atif: okay what is your favourite festival
+Nova: Diwali, hands down. Lights, sweets, and no work!
+Atif: simulator boring
+Nova: Life's not a simulator, bro. What's really bugging you?
+Atif: actually I had a really bad accident yesterday
+Nova: Damn, you okay? What happened?
+Atif: so I got an hour by truck
+Nova: Truck ride? Sounds like a bumpy adventure. What's the plan?
+Atif: hello what are you doing
+Nova: Yo Atif! Just chilling, what's up with you?
+Atif: tell me something about yourself
+Nova: I'm a meme queen, music junkie, and your personal sarcasm supplier. What's next on your mind?
+Atif: what have we discuss up until now
+Nova: We've covered Diwali, your accident, and my meme obsession. What's next, buddy?
+Retrieved Memory: Atif has to travel an hour by truck.
+Truck accident, huh? Spill the deets, man. What went down?
+hey Nova how are you
+conversation_history : 
+Retrieved Memory: 
+Hey Nishant, surviving. You?
+so could you recommend me any movies
+conversation_history : Nishant: hey Nova how are you
+Nova: Hey Nishant, surviving. You?
+Retrieved Memory: 
+Sure, 'Inception' if you wanna think, 'Superbad' if you wanna laugh. Your pick!
+Achcha Ek kam karo se hindi mein baat karna aur ek baat batao Aapka favourite khana kaun sa hai
+conversation_history : Nishant: hey Nova how are you
+Nova: Hey Nishant, surviving. You?
+Nishant: so could you recommend me any movies
+Nova: Sure, 'Inception' if you wanna think, 'Superbad' if you wanna laugh. Your pick!
+Retrieved Memory: 
+Biryani, yaar! Tumhara?
+soap really bad accident yesterday
+conversation_history : Nishant: hey Nova how are you
+Nova: Hey Nishant, surviving. You?
+Nishant: so could you recommend me any movies
+Nova: Sure, 'Inception' if you wanna think, 'Superbad' if you wanna laugh. Your pick!
+Nishant: Achcha Ek kam karo se hindi mein baat karna aur ek baat batao Aapka favourite khana kaun sa hai
+Nova: Biryani, yaar! Tumhara?
+Retrieved Memory: 
+Kya? Kaise? Sab theek hai na?
+kya kar rahi ho
+conversation_history : Nishant: hey Nova how are you
+Nova: Hey Nishant, surviving. You?
+Nishant: so could you recommend me any movies
+Nova: Sure, 'Inception' if you wanna think, 'Superbad' if you wanna laugh. Your pick!
+Nishant: Achcha Ek kam karo se hindi mein baat karna aur ek baat batao Aapka favourite khana kaun sa hai
+Nova: Biryani, yaar! Tumhara?
+Nishant: soap really bad accident yesterday
+Nova: Kya? Kaise? Sab theek hai na?
+Retrieved Memory: Nishant experienced a really bad accident yesterday.
+Abhi toh chill kar rahi hoon. Tum kaise ho?
+TV ka Rang Kya Hai
+conversation_history : Nishant: hey Nova how are you
+Nova: Hey Nishant, surviving. You?
+Nishant: so could you recommend me any movies
+Nova: Sure, 'Inception' if you wanna think, 'Superbad' if you wanna laugh. Your pick!
+Nishant: Achcha Ek kam karo se hindi mein baat karna aur ek baat batao Aapka favourite khana kaun sa hai
+Nova: Biryani, yaar! Tumhara?
+Nishant: soap really bad accident yesterday
+Nova: Kya? Kaise? Sab theek hai na?
+Nishant: kya kar rahi ho
+Nova: Abhi toh chill kar rahi hoon. Tum kaise ho?
+Retrieved Memory: Nishant experienced a really bad accident yesterday.
+TV ka rang? Seriously? Black and white, obviously!
+[2024-08-27 21:09:34 +0530] [211296] [WARNING] Invalid HTTP request received.
+[2024-08-27 21:09:43 +0530] [211294] [WARNING] Invalid HTTP request received.
+[2024-08-27 21:09:53 +0530] [211296] [WARNING] Invalid HTTP request received.
+[2024-08-27 23:31:57 +0530] [211296] [WARNING] Invalid HTTP request received.

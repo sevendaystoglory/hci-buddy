@@ -39,8 +39,9 @@ def openai_response(prompt_list : list, structured = False):
     global openai_client
 
     if structured == "True-memory":
+
         completion = openai_client.beta.chat.completions.parse(
-        model=config['openai_model'],
+        model='gpt-4o-mini',
         messages=prompt_list,
         response_format=MemoryResponse,
         )

@@ -6,16 +6,15 @@ Description: Implements various global methods for Nova
 """
 
 from utilities.db_utils import *
-from utilities.llm_utils import openai_response, bedrock_response, groq_response, openai_client
-from utilities.core_utils import remove_emojis, remove_prefixes
+from utilities.llm_utils import openai_response, bedrock_response, groq_response
+from utilities.core_utils import remove_emojis, remove_prefixes, extract_quoted_content
 import asyncio
-import concurrent.futures
 
 async def generate_reply_1(user_utterance: str, user_name: str, conversation: str, user_id: str, db):
-    buddy_preamble = load_text_file('utilities/prompts/buddy_preamble.txt').format(buddy_name=buddy_name)
+    buddy_preamble = load_text_file('utilities/prompts/buddy_preamble.txt').format(buddy_name=buddy_name, user_name=user_name)
     
     memory = get_memory(db=db, user_id=user_id)
-    print(colored(memory, 'yellow'))
+    print(colored(f"Retrieved Memory: {memory}", 'red'))
 
     # To retrieve a summary
     user_summary = get_user_summary(user_id=user_id, db=db)
@@ -28,6 +27,8 @@ async def generate_reply_1(user_utterance: str, user_name: str, conversation: st
         synthesize_memory(user_utterance=user_utterance, user_name=user_name, user_id=user_id, conversation=conversation, db=db),
         model_response(model_name=reply_model_name, prompt_list=prompt_list)
     )
+
+    reply = extract_quoted_content(reply)
 
     return reply
 
@@ -73,6 +74,12 @@ async def model_response(model_name: str, prompt_list: list, structured=False):
 
     # Remove emojis and prefixes from the reply
     reply = remove_prefixes(remove_emojis(reply), ['Nova:', 'Nova :', 'Haha,', 'haha,', 'nova:', 'nova: '])
+    
+    # New function to extract content within outermost quotes
+    def extract_content(text):
+        if text.startswith('"') and text.endswith('"'):
+            return text[1:-1]
+        return text
 
     return reply
 
@@ -94,5 +101,4 @@ async def generate_summary_and_insights(user_id: str, conversation: str, db: Ses
     
     return summary
 
-    
 

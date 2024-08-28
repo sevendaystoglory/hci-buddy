@@ -14,7 +14,7 @@ backlog = 2048
 
 # Worker processes
 workers = 3 #number of workers spawned = 2 x (num. of cores) + 1  
-threads = 1 #number of threads per worker
+threads = 4 #number of threads per worker
 worker_class = "uvicorn.workers.UvicornWorker"
 worker_connections = 1000
 timeout = 300

@@ -56,11 +56,12 @@ def openai_response(prompt_list : list, structured = False):
 
     else:
         completion = openai_client.chat.completions.create(
-            model = 'gpt-3.5-turbo',
+            model = config['openai_model'],
             messages = prompt_list,
             temperature = 0.2
         )
     reply = completion.choices[0].message.content
+    print("usage: ", completion.usage)
     return(reply)
 
 #---

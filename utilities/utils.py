@@ -9,6 +9,7 @@ from utilities.db_utils import *
 from utilities.llm_utils import openai_response, bedrock_response, groq_response
 from utilities.core_utils import remove_emojis, remove_prefixes, extract_quoted_content
 import asyncio
+import concurrent.futures
 
 async def generate_reply_1(user_utterance: str, user_name: str, conversation: str, user_id: str, db):
     buddy_preamble = load_text_file('utilities/prompts/buddy_preamble.txt').format(buddy_name=buddy_name, user_name=user_name)
@@ -23,15 +24,28 @@ async def generate_reply_1(user_utterance: str, user_name: str, conversation: st
     prompt_list = [{"role": "system", "content": buddy_preamble}, {"role": "user", "content": content}]
 
     # Run both coroutines concurrently
-    memory_result, reply = await asyncio.gather(
-        synthesize_memory(user_utterance=user_utterance, user_name=user_name, user_id=user_id, conversation=conversation, db=db),
-        model_response(model_name=reply_model_name, prompt_list=prompt_list)
-    )
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        memory_future = executor.submit(asyncio.run, synthesize_memory(user_utterance=user_utterance, user_name=user_name, user_id=user_id, conversation=conversation, db=db))
+        reply_future = executor.submit(asyncio.run, model_response(model_name=reply_model_name, prompt_list=prompt_list))
+        # future = executor.submit(asyncio.run, generate_summary_and_insights(user_id=user_id, db=db, conversation=conversation))
+        # Wait only for the reply_future to complete
+        reply = reply_future.result()
 
-    reply = extract_quoted_content(reply)
+    if asyncio.iscoroutine(reply):
+        reply = asyncio.run(reply)
 
-    return reply
+    # Start a background task to handle the memory_future
+    asyncio.create_task(handle_memory_future(memory_future))
 
+    return str(reply)
+
+async def handle_memory_future(memory_future):
+    try:
+        memory_result = memory_future.result()
+        # Handle the memory result if needed
+    except Exception as e:
+        print(f"Error in memory processing: {e}")
+    
 
 async def synthesize_memory(user_utterance: str, user_name: str, user_id: str, conversation, db):
     if user_utterance != "":
@@ -86,7 +100,7 @@ async def model_response(model_name: str, prompt_list: list, structured=False):
 async def generate_summary_and_insights(user_id: str, conversation: str, db: Session):
     # Load the summary prompt
     summary_prompt = load_text_file('utilities/prompts/summary_prompt.txt')
-    
+    print("limit 10")
     # Create the prompt list
     prompt_list = [
         {"role": "system", "content": "You are an AI assistant tasked with generating a summary of a user's conversation."},

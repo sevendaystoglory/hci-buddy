@@ -25,27 +25,18 @@ async def generate_reply_1(user_utterance: str, user_name: str, conversation: st
 
     # Run both coroutines concurrently
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        memory_future = executor.submit(asyncio.run, synthesize_memory(user_utterance=user_utterance, user_name=user_name, user_id=user_id, conversation=conversation, db=db))
+        # Queue reply_future first
         reply_future = executor.submit(asyncio.run, model_response(model_name=reply_model_name, prompt_list=prompt_list))
-        # future = executor.submit(asyncio.run, generate_summary_and_insights(user_id=user_id, db=db, conversation=conversation))
+        
+        # Queue other futures after reply_future
+        memory_future = executor.submit(asyncio.run, synthesize_memory(user_utterance=user_utterance, user_name=user_name, user_id=user_id, conversation=conversation, db=db))
+        # summary_future = executor.submit(asyncio.run, generate_summary_and_insights(user_id=user_id, db=db, conversation=conversation))
+
         # Wait only for the reply_future to complete
         reply = reply_future.result()
+        memory = memory_future.result()
 
-    if asyncio.iscoroutine(reply):
-        reply = asyncio.run(reply)
-
-    # Start a background task to handle the memory_future
-    asyncio.create_task(handle_memory_future(memory_future))
-
-    return str(reply)
-
-async def handle_memory_future(memory_future):
-    try:
-        memory_result = memory_future.result()
-        # Handle the memory result if needed
-    except Exception as e:
-        print(f"Error in memory processing: {e}")
-    
+    return reply
 
 async def synthesize_memory(user_utterance: str, user_name: str, user_id: str, conversation, db):
     if user_utterance != "":
@@ -65,7 +56,7 @@ async def synthesize_memory(user_utterance: str, user_name: str, user_id: str, c
     response = await model_response(prompt_list=prompt_list, model_name=memory_model_name, structured='True-memory')
     
     if response['memory_found'] == True:
-        store_memory(db=db, user_id=user_id, memory=response['memory'])
+        update_memory(db=db, user_id=user_id, memory=response['memory'])
         return True
     else:
         return False

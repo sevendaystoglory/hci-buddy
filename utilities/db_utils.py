@@ -22,7 +22,7 @@ config = load_config()
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, unique=True, nullable=False)
+    user_id = Column(String(100), unique=True, nullable=False)
     name = Column(String(100), nullable=False)
     email = Column(String(100), nullable=False)
     password_hash = Column(String(1024), nullable=False)
@@ -37,14 +37,15 @@ class User(Base):
 class Memory(Base):
     __tablename__ = 'memory'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, unique=True, nullable=False)
+    user_id = Column(String(100), nullable=False)
     memory = Column(Text, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)
 
 # Conversation model
 class Conversation(Base):
     __tablename__ = 'conversation'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, nullable=False)
+    user_id = Column(String(100), nullable=False)
     role = Column(String(50), nullable=False)
     message = Column(Text, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
@@ -161,12 +162,8 @@ def read_conversation(user_id: str, db: Session):
 
 # Store or update memory for a user
 def store_memory(db: Session, user_id: str, memory: str):
-    db_memory = db.query(Memory).filter(Memory.user_id == user_id).first()
-    if db_memory:
-        db_memory.memory = memory
-    else:
-        db_memory = Memory(user_id=user_id, memory=memory)
-        db.add(db_memory)
+    db_memory = Memory(user_id=user_id, memory=memory)
+    db.add(db_memory)
     db.commit()
     db.refresh(db_memory)
     return db_memory

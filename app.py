@@ -11,10 +11,8 @@ from pydantic import BaseModel
 import subprocess
 import uvicorn
 from utilities.utils import *
-from google.cloud import texttospeech
 import asyncio
 import time
-import io
 
 app = FastAPI()
 
@@ -128,37 +126,15 @@ async def generate_audio(data: InputData, db: Session = Depends(get_db)):
         reply = await generate_reply_1(user_utterance=user_input, user_id=user_id, user_name=user_name, conversation=conversation_history, db=db)
         add_conversation(user_id=user_id, role=user_name, message=user_input, db=db)
         add_conversation(user_id=user_id, role=buddy_name, message=reply, db=db)
+
         if asyncio.iscoroutine(reply):
             reply = asyncio.run(reply)
         print(reply)
 
         # Google Text-to-Speech implementation
-        client = texttospeech.TextToSpeechClient.from_service_account_file('config/google_secret_key_tts.json')
-        voice = texttospeech.VoiceSelectionParams(
-            language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE, name="en-US-Neural2-C"
-        )
-        audio_config = texttospeech.AudioConfig(
-            audio_encoding=texttospeech.AudioEncoding.MP3
-        )
-
-        input_text = texttospeech.SynthesisInput(text=reply)
-
-        response = client.synthesize_speech(
-            input=input_text, voice=voice, audio_config=audio_config
-        )
-
-        audio_content = io.BytesIO(response.audio_content)
-        audio_content.seek(0)
-
-        # Create a JSON response with the text reply
-        json_response = json.dumps({"text": reply}).encode('utf-8')
-
-        # Combine audio and JSON data
-        combined_content = io.BytesIO()
-        combined_content.write(json_response)
-        combined_content.write(b'\n')  # Add a newline separator
-        combined_content.write(audio_content.getvalue())
-        combined_content.seek(0)
+        speech, audio_type = generate_text_to_speech(reply)
+        
+        combined_content = prepare_combined_content(reply, speech, audio_type)
 
         end = time.time()
         print(f"Time Elapsed: {end-start}")

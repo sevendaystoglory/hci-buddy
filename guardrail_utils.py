@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from utilities.utils import load_text_file
 from utilities.llm_utils import openai_guardrail, GuardRailResponse
 
+
 class GuardRail:
     def __init__(self, sensitive_topics: List[str]):
         self.sensitive_topics = sensitive_topics

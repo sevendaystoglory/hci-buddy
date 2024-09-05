@@ -34,6 +34,10 @@ class MemoryResponse(BaseModel):
     memory_found: bool
     memory: str
 
+class GuardRailResponse(BaseModel):
+    is_sensitive: bool
+    explanation: str
+
 def openai_response(prompt_list : list, structured = False):
 
     global openai_client
@@ -93,7 +97,6 @@ def bedrock_response(prompt_list : list, structured = False):
     else:
         reply = claude_3_5_sonnet_response(prompt_list = prompt_list)
     return(reply)
-
 
 def groq_response(prompt_list : list, structured = False):
     if structured == "True-memory":
@@ -188,3 +191,24 @@ def groq_mixtral_response(prompt_list : list):
         stop=None,
     )
     return(completion.choices[0].message.content)
+
+def openai_guardrail(prompt_list: list):
+    global openai_client
+
+    try:
+        completion = openai_client.beta.chat.completions.parse(
+            model=config['openai_model'],
+            messages=prompt_list,
+            response_format=GuardRailResponse
+        )
+        message = completion.choices[0].message
+
+        if message.refusal:
+            return {'is_sensitive': False}
+        elif message.parsed.is_sensitive == True:
+            return ({'is_sensitive' : True, 'explanation' : message.parsed.explanation})
+        else:
+            return ({'is_sensitive' : False})
+    except Exception as e:
+        print(f"Error in OpenAI API call: {str(e)}")
+        return {'is_sensitive' : False}

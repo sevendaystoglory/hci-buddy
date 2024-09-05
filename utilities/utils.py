@@ -10,6 +10,8 @@ from utilities.llm_utils import openai_response, bedrock_response, groq_response
 from utilities.core_utils import remove_emojis, remove_prefixes, extract_quoted_content
 import asyncio
 import concurrent.futures
+from google.cloud import texttospeech
+import io
 
 async def generate_reply_1(user_utterance: str, user_name: str, conversation: str, user_id: str, db):
     buddy_preamble = load_text_file('utilities/prompts/buddy_preamble.txt').format(buddy_name=buddy_name, user_name=user_name)
@@ -106,4 +108,39 @@ async def generate_summary_and_insights(user_id: str, conversation: str, db: Ses
     
     return summary
 
+def generate_text_to_speech(text: str):
+    client = texttospeech.TextToSpeechClient.from_service_account_file('config/google_secret_key_tts.json')
+    voice_type = config['tts_voice_google']
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE, name=voice_type
+    )
+    type = 'mp3'
+    if 'Neural' in voice_type:
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3
+        )
+        type = 'mp3'
+    elif 'Journey' in voice_type:
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.LINEAR16
+        )
+        type = 'wav'
 
+    input_text = texttospeech.SynthesisInput(text=text)
+    response = client.synthesize_speech(
+    input=input_text, voice=voice, audio_config=audio_config
+    )
+    return response, type
+
+def prepare_combined_content(reply, speech, audio_type):
+    audio_content = io.BytesIO(speech.audio_content)
+    audio_content.seek(0)
+    # Create a JSON response with the text reply
+    json_response = json.dumps({"text": reply}).encode('utf-8')
+    # Combine audio and JSON data
+    combined_content = io.BytesIO()
+    combined_content.write(json_response)
+    combined_content.write(b'\n')  # Add a newline separator
+    combined_content.write(audio_content.getvalue())
+    combined_content.seek(0)
+    return combined_content

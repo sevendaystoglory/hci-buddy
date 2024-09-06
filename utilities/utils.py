@@ -16,7 +16,7 @@ import io
 async def generate_reply_1(user_utterance: str, user_name: str, conversation: str, user_id: str, db):
     buddy_preamble = load_text_file('utilities/prompts/buddy_preamble.txt').format(buddy_name=buddy_name, user_name=user_name)
     
-    memory = get_memory(db=db, user_id=user_id)
+    memory = read_memory(user_id=user_id, db=db)
     print(colored(f"Retrieved Memory: {memory}", 'red'))
 
     # To retrieve a summary

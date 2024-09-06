@@ -5,12 +5,13 @@ File: utilities/db_utils.py
 Description: Implements methods/ functions for database operations
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, LargeBinary
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from fastapi.responses import JSONResponse
 from utilities.core_utils import *
+from utilities.encrypted_utils import encrypt_message, decrypt_message
 
 Base = declarative_base()
 config = load_config()
@@ -38,7 +39,7 @@ class Memory(Base):
     __tablename__ = 'memory'
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(100), nullable=False)
-    memory = Column(Text, nullable=False)
+    memory = Column(LargeBinary, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
 # Conversation model
@@ -47,7 +48,7 @@ class Conversation(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(100), nullable=False)
     role = Column(String(50), nullable=False)
-    message = Column(Text, nullable=False)
+    message = Column(LargeBinary, nullable=False)  # Change this line
     timestamp = Column(DateTime, default=datetime.utcnow)
 
 # Summary model
@@ -69,9 +70,7 @@ def get_db():
     finally:
         db.close()
 
-
 #CRUD Database functions ================================================================
-
 
 # Create a new user
 def create_user(user_id: str, name: str, password: str, email : str, db: Session):
@@ -100,8 +99,7 @@ def user_login(email: str, password: str, db: Session):
 
     # If both email and password match, return the user_id
     return {"user_id": user.user_id, "user_name": user.name}    
-
-
+    
 # Read user by user_id
 def get_user_by_id(user_id: str, db: Session):
     return db.query(User).filter(User.user_id == user_id).first()
@@ -128,40 +126,46 @@ def delete_user(user_id: str, db: Session):
 
 # Route to update memory
 def update_memory(user_id: str, memory: str, db: Session):
-    return store_memory(db=db, user_id=user_id, memory=memory)
+    encrypted_memory = encrypt_message(memory)
+    return store_memory(db=db, user_id=user_id, memory=encrypted_memory)
 
 # Route to get memory
 def read_memory(user_id: str, db: Session):
-    memory = get_memory(db=db, user_id=user_id)
-    if memory is None:
-        raise HTTPException(status_code=404, detail="Memory not found")
-    return memory
+    memory_records = get_memory(db=db, user_id=user_id)
+    if not memory_records:
+        return ""
+    
+    decrypted_memories = []
+    for record in memory_records:
+        decrypted_memory = decrypt_message(record.memory)
+        decrypted_memories.append(decrypted_memory)
+    
+    return "\n".join(decrypted_memories)
 
 # Route to add a conversation message
 def add_conversation(user_id: str, role: str, message: str, db: Session):
-    return store_conversation(db=db, user_id=user_id, role=role, message=message)
+    encrypted_message = encrypt_message(message)
+    return store_conversation(db=db, user_id=user_id, role=role, message=encrypted_message)
 
 # Route to get conversation
 def read_conversation(user_id: str, db: Session):
     conversation_records = get_conversation(db=db, user_id=user_id)
     
-    # Check if there are any conversation records
     if not conversation_records:
         return ""
 
-    # Concatenate the conversation into a single string
     conversation_str = ""
     for record in conversation_records:
-        conversation_str += f"{record.role}: {record.message}\n"
+        
+        decrypted_message = decrypt_message(record.message)
+        conversation_str += f"{record.role}: {decrypted_message}\n"
     
-    return conversation_str.strip()  # Remove the trailing newline
-
+    return conversation_str.strip()
 
 #CRUD Database helper functions =========================================================
 
-
 # Store or update memory for a user
-def store_memory(db: Session, user_id: str, memory: str):
+def store_memory(db: Session, user_id: str, memory: bytes):
     db_memory = Memory(user_id=user_id, memory=memory)
     db.add(db_memory)
     db.commit()
@@ -170,13 +174,11 @@ def store_memory(db: Session, user_id: str, memory: str):
 
 # Retrieve memory for a user
 def get_memory(db: Session, user_id: str):
-    memory_records = db.query(Memory).filter(Memory.user_id == user_id).all()
-    if not memory_records:
-        return ""
-    return " ".join(record.memory for record in memory_records)
+    memory_records = db.query(Memory).filter(Memory.user_id == user_id).order_by(Memory.timestamp).all()
+    return memory_records
 
 # Store a conversation message
-def store_conversation(db: Session, user_id: str, role: str, message: str):
+def store_conversation(db: Session, user_id: str, role: str, message: bytes):
     db_conversation = Conversation(user_id=user_id, role=role, message=message)
     db.add(db_conversation)
     db.commit()
@@ -189,17 +191,18 @@ def get_conversation(db: Session, user_id: str):
 
 # Add or update summary for a user
 def upsert_summary(user_id: str, summary: str, db: Session):
-    return store_summary(db=db, user_id=user_id, summary=summary)
+    encrypted_summary = encrypt_message(summary)
+    return store_summary(db=db, user_id=user_id, summary=encrypted_summary)
 
 # Get summary for a user
 def get_user_summary(user_id: str, db: Session):
-    summary = retrieve_summary(db=db, user_id=user_id)
-    if summary is None:
+    encrypted_summary = retrieve_summary(db=db, user_id=user_id)
+    if encrypted_summary is None:
         return ""
-    return summary
+    return decrypt_message(encrypted_summary)
 
 # Store or update summary for a user
-def store_summary(db: Session, user_id: str, summary: str):
+def store_summary(db: Session, user_id: str, summary: bytes):
     db_summary = db.query(Summary).filter(Summary.user_id == user_id).first()
     if db_summary:
         db_summary.summary = summary

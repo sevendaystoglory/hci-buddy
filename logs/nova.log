@@ -15528,3 +15528,18 @@ WHERE conversation.user_id = %(user_id_1)s ORDER BY conversation.timestamp]
 [2024-09-05 08:02:57 +0530] [320489] [ERROR] Worker (pid:320493) was sent SIGTERM!
 [2024-09-05 08:02:57 +0530] [320489] [ERROR] Worker (pid:320491) was sent SIGTERM!
 [2024-09-05 08:02:58 +0530] [320489] [INFO] Shutting down: Master
+[2024-09-06 07:14:02 +0530] [376946] [INFO] Starting gunicorn 23.0.0
+[2024-09-06 07:14:02 +0530] [376946] [INFO] Listening at: http://0.0.0.0:6000 (376946)
+[2024-09-06 07:14:02 +0530] [376946] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2024-09-06 07:14:02 +0530] [376949] [INFO] Booting worker with pid: 376949
+[2024-09-06 07:14:02 +0530] [376950] [INFO] Booting worker with pid: 376950
+[2024-09-06 07:14:02 +0530] [376951] [INFO] Booting worker with pid: 376951
+[2024-09-06 07:14:04 +0530] [376949] [INFO] Started server process [376949]
+[2024-09-06 07:14:04 +0530] [376949] [INFO] Waiting for application startup.
+[2024-09-06 07:14:04 +0530] [376949] [INFO] Application startup complete.
+[2024-09-06 07:14:04 +0530] [376950] [INFO] Started server process [376950]
+[2024-09-06 07:14:04 +0530] [376950] [INFO] Waiting for application startup.
+[2024-09-06 07:14:04 +0530] [376950] [INFO] Application startup complete.
+[2024-09-06 07:14:04 +0530] [376951] [INFO] Started server process [376951]
+[2024-09-06 07:14:04 +0530] [376951] [INFO] Waiting for application startup.
+[2024-09-06 07:14:04 +0530] [376951] [INFO] Application startup complete.

@@ -35,6 +35,12 @@ class Login(BaseModel):
     email: str
     password: str
 
+class ContinuousInputData(BaseModel):
+    transcription: str
+    question: str
+    user_id: str
+    user_name: str
+
 @app.post("/sign_up")
 async def new_user_sign_up(user: UserCreate, db: Session = Depends(get_db)):
     user_id = generate_new_user_id()
@@ -82,9 +88,10 @@ async def generate_text(data: InputData, db: Session = Depends(get_db)):
     user_input = data.utterance
     user_name = data.user_name
     user_id = data.user_id
-
-    print(user_id)
-    print(user_input)
+    if data.transcript:
+        print(colored(f"transcript : {data.transcript}", 'green'))
+    else:
+        print(colored(f"transcript : None", 'red'))
 
     conversation_history = read_conversation(user_id=user_id, db=db)
     print(colored(f"conversation_history : {conversation_history}", 'yellow'))
@@ -128,6 +135,38 @@ async def generate_audio(data: InputData, db: Session = Depends(get_db)):
         add_conversation(user_id=user_id, role=buddy_name, message=reply, db=db)
 
         if asyncio.iscoroutine(reply):
+            reply = asyncio.run(reply)  
+        print(reply)
+        # Google Text-to-Speech implementation
+        speech, audio_type = generate_text_to_speech(reply)
+        
+        combined_content = prepare_combined_content(reply, speech, audio_type)
+
+        end = time.time()
+        print(f"Time Elapsed: {end-start}")
+
+        # Return a streaming response with the combined content
+        return StreamingResponse(combined_content, media_type='application/octet-stream')
+    else:
+        return JSONResponse(status_code=400, content={"message": "Invalid input"})
+
+@app.post("/generate_response_continuous")
+async def generate_response_continuous(data: ContinuousInputData, db: Session = Depends(get_db)):
+    start = time.time()
+    
+    print(f"User ID: {data.user_id}")
+    print(f"Transcription: {data.transcription}")
+    print(f"Question: {data.question}")
+
+    conversation_history = read_conversation(user_id=data.user_id, db=db)
+    print(colored(f"conversation_history : {conversation_history}", 'yellow'))
+
+    if data.question:
+        reply = await generate_reply_1(user_utterance=data.question, user_id=data.user_id, user_name=data.user_name, conversation=conversation_history, db=db)
+        add_conversation(user_id=data.user_id, role=data.user_name, message=data.question, db=db)
+        add_conversation(user_id=data.user_id, role=buddy_name, message=reply, db=db)
+
+        if asyncio.iscoroutine(reply):
             reply = asyncio.run(reply)
         print(reply)
 
@@ -142,8 +181,7 @@ async def generate_audio(data: InputData, db: Session = Depends(get_db)):
         # Return a streaming response with the combined content
         return StreamingResponse(combined_content, media_type='application/octet-stream')
     else:
-        return JSONResponse(status_code=400, content={"message": "Invalid input"})
- 
+        return JSONResponse(status_code=400, content={"message": "Invalid input: Question is required"})
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=6000, threaded=True)

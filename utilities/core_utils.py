@@ -5,7 +5,6 @@ File: utilities/core_utils.py
 Description: Implements functions with shared logic across all other util files
 """
 
-import os
 from termcolor import colored
 import time
 import json
@@ -131,7 +130,17 @@ def transcribe_audio(file_path : str):
     print(transcription.text)
 
 def extract_quoted_content(reply):
-    reply = remove_prefixes(remove_emojis(reply), ['Nova:', 'Nova :', 'Haha,', 'haha,', 'nova:', 'nova: '])
+    prefixes = [
+        f'{buddy_name}:',
+        f'{buddy_name} :',
+        f'{buddy_name.lower()}:',
+        f'{buddy_name.lower()} :',
+        f'{buddy_name.capitalize()}:',
+        f'{buddy_name.capitalize()} :',
+        'Haha,',
+        'haha,'
+    ]
+    reply = remove_prefixes(remove_emojis(reply), prefixes)
     
     # Function to extract content and remove specific patterns
     def extract_and_clean(text):

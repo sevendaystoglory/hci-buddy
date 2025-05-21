@@ -8,5 +8,5 @@
     "database_url": "postgresql://nishant:nova123456@localhost:5432/nova_db",
     "sensitive_topics": ["politics", "religion", "transgender", "Israel Palestine Conflict"],
     "tts_voice_google2": "en-US-Neural2-C",
-    "tts_voice_google": "en-US-Journey-F"
+    "tts_voice_google": "en-US-Journey-O"
 }

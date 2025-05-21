@@ -12,6 +12,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from fastapi.responses import JSONResponse
 from utilities.core_utils import *
 from utilities.encrypted_utils import encrypt_message, decrypt_message
+from datetime import datetime
 
 Base = declarative_base()
 config = load_config()
@@ -39,8 +40,17 @@ class Memory(Base):
     __tablename__ = 'memory'
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(100), nullable=False)
-    memory = Column(LargeBinary, nullable=False)
+    memory = Column(LargeBinary, nullable=False) #encrypted memory
     timestamp = Column(DateTime, default=datetime.utcnow)
+
+# Transcription model
+class Transcription(Base):
+    __tablename__ = 'transcription'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(String(100), nullable=False)
+    transcription = Column(LargeBinary, nullable=False) #encrypted transcription
+    start_time = Column(DateTime, default=datetime.utcnow)
+    end_time = Column(DateTime, default=datetime.utcnow)
 
 # Conversation model
 class Conversation(Base):
@@ -48,7 +58,7 @@ class Conversation(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(100), nullable=False)
     role = Column(String(50), nullable=False)
-    message = Column(LargeBinary, nullable=False)  # Change this line
+    message = Column(LargeBinary, nullable=False) #encrypted message
     timestamp = Column(DateTime, default=datetime.utcnow)
 
 # Summary model
@@ -56,7 +66,7 @@ class Summary(Base):
     __tablename__ = 'summary'
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(100), unique=True, nullable=False)
-    summary = Column(Text, nullable=False)
+    summary = Column(Text, nullable=False) #non-encrypted summary
 
 #Instantiate a database Session =========================================================
 
@@ -217,3 +227,40 @@ def store_summary(db: Session, user_id: str, summary: bytes):
 def retrieve_summary(db: Session, user_id: str):
     summary_record = db.query(Summary).filter(Summary.user_id == user_id).first()
     return summary_record.summary if summary_record else None
+
+# Add these to your route functions
+def add_transcription(user_id: str, transcription: str, start_time: datetime, end_time: datetime, db: Session):
+    encrypted_transcription = encrypt_message(transcription)
+    return store_transcription(db=db, user_id=user_id, transcription=encrypted_transcription, start_time=start_time, end_time=end_time)
+
+def read_transcription(user_id: str, db: Session) -> list:
+    transcription_records = get_transcription(db=db, user_id=user_id)
+    
+    if not transcription_records:
+        return []
+
+    decrypted_transcriptions = []
+    for record in transcription_records:
+        decrypted_transcription = decrypt_message(record.transcription)
+        if decrypted_transcription not in ['', ' ']:
+            decrypted_transcriptions.append({
+                "transcription": decrypted_transcription,
+        })
+        # decrypted_transcriptions.append({
+        #     "transcription": decrypted_transcription,
+        #     "start_time": record.start_time,
+        #     "end_time": record.end_time
+        # })
+    
+    return decrypted_transcriptions
+
+# Add these to your helper functions
+def store_transcription(db: Session, user_id: str, transcription: bytes, start_time: datetime, end_time: datetime):
+    db_transcription = Transcription(user_id=user_id, transcription=transcription, start_time=start_time, end_time=end_time)
+    db.add(db_transcription)
+    db.commit()
+    db.refresh(db_transcription)
+    return db_transcription
+
+def get_transcription(db: Session, user_id: str):
+    return db.query(Transcription).filter(Transcription.user_id == user_id).order_by(Transcription.start_time).all()

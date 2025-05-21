@@ -94,7 +94,7 @@ def generate_new_user_id():
     uuid_str = str(uuid.uuid4()).replace('-', '')
     return f"user_{uuid_str[:32]}"
 
-def generate_final_prompt(user_id: str, user_name: str, memory: str, user_utterance: str, conversation: str, buddy_name: str, user_summary : str):
+def generate_final_prompt(user_id: str, user_name: str, memory: str, user_utterance: str, conversation: str, buddy_name: str, user_summary : str, transcription = None):
     prompt_template = load_text_file('utilities/prompts/final_prompt_template.txt')
 
     if conversation: #conversation is non empty
@@ -105,7 +105,7 @@ def generate_final_prompt(user_id: str, user_name: str, memory: str, user_uttera
         truncated_conversation = ""
 
     if memory:
-        memory = f"""The following is a memory about {user_name}. It contains experiences and opinions.
+        memory = f"""The following is a memory about {user_name}. It contains experiences and opinions. Just don't dwell on it.
         {memory}
         """
 
